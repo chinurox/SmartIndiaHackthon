@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "444510142608",
+    "firebase_url": "https://smartindiahackthon.firebaseio.com",
+    "project_id": "smartindiahackthon",
+    "storage_bucket": "smartindiahackthon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444510142608:android:bfce0c9e4e1970d2",
+        "android_client_info": {
+          "package_name": "com.example.gargc.smartindiahackthon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444510142608-7nur098c0kafmrrd7rp9n8giqgsqttg9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gargc.smartindiahackthon",
+            "certificate_hash": "b29316b87204b3ee125990feabf6d0b446840308"
+          }
+        },
+        {
+          "client_id": "444510142608-j72eon0j87ttnaacvnt7fisndfqmr2h9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOjbasuMmD1upehf16bgUQBH4jlnU2gzk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444510142608-j72eon0j87ttnaacvnt7fisndfqmr2h9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
