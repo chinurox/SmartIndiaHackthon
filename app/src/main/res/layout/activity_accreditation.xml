@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.gargc.smartindiahackthon.Activity.Investor.SignUp.Accreditation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/linear"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+
+            android:text="APPLY FOR INVESTOR ACCESS"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:textSize="25dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearlayout1"
+            android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accreditation"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"/>
+
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:id="@+id/radiogroup1"
+            android:orientation="vertical">
+
+            <RadioButton android:id="@+id/asindividual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="As an Individual" />
+            <RadioButton android:id="@+id/asatrust"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="As a Trust" />
+
+            <RadioButton android:id="@+id/firmorfund"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="As a Firm or Fund" />
+
+        </RadioGroup>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Which of the following ways have you invested previously?"
+                android:textSize="20dp"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:id="@+id/radiogroup2"
+                android:orientation="vertical">
+            <RadioButton android:id="@+id/directlyintostartup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Directly into a Startup" />
+
+                <RadioButton android:id="@+id/LPvcfund"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="As an LP in a VC fund" />
+
+                <RadioButton android:id="@+id/publicmarkets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="In the public markets" />
+
+                <RadioButton android:id="@+id/singledeal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Into a single-deal SPV" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Other than investing,in what ways have you helped a startup?"
+                android:textSize="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:id="@+id/radiogroup3">
+                <RadioButton android:id="@+id/recruiting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recruiting" />
+
+                <RadioButton android:id="@+id/Product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product/Strategy" />
+
+                <RadioButton android:id="@+id/Marketting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Marketting" />
+
+                <RadioButton android:id="@+id/customers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Connect with customers or parteners" />
+            </RadioGroup>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NEXT"
+                android:background="@drawable/ripple_effect_blue"
+                android:textColor="#FFF"
+                android:layout_gravity="center"
+                android:id="@+id/next"
+                android:layout_marginTop="40dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/linearlayout2"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DETAILS"
+                android:textSize="25dp"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
+
+
+
+
+            <EditText
+                android:id="@+id/budget"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border_rectangular_white"
+                android:gravity="start|center_vertical"
+                android:hint="What is your yearly investing budget for startups"
+                android:maxLines="1"
+                android:paddingLeft="16dp"
+                android:singleLine="true"
+                android:textColor="#212121"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/linkedin"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border_rectangular_white"
+                android:gravity="start|center_vertical"
+                android:hint="Linkedin"
+                android:maxLines="1"
+                android:paddingLeft="16dp"
+                android:singleLine="true"
+                android:textColor="#212121"
+                android:textSize="14sp" />
+            <EditText
+                android:id="@+id/website"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border_rectangular_white"
+                android:gravity="start|center_vertical"
+                android:hint="Website"
+                android:maxLines="1"
+                android:paddingLeft="16dp"
+                android:singleLine="true"
+                android:textColor="#212121"
+                android:textSize="14sp" />
+
+
+            <EditText
+                android:id="@+id/bio"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border_rectangular_white"
+                android:gravity="start|center_vertical"
+                android:hint="Mini Bio"
+                android:maxLines="5"
+                android:paddingLeft="16dp"
+                android:singleLine="true"
+                android:textColor="#212121"
+                android:textSize="14sp" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apply"
+                android:background="@drawable/ripple_effect_blue"
+                android:textColor="#FFF"
+                android:layout_gravity="center"
+                android:id="@+id/apply"
+                android:layout_marginTop="40dp"
+                />
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

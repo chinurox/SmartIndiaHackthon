@@ -13,8 +13,7 @@ import android.widget.TextView;
 
 
 import com.example.gargc.smartindiahackthon.Activity.LoginActivity;
-import com.example.gargc.smartindiahackthon.Activity.SignUpActivity;
-import com.example.gargc.smartindiahackthon.Activity.Startup.StartupFirstActivity;
+import com.example.gargc.smartindiahackthon.Activity.Startup.SignUpActivity;
 import com.example.gargc.smartindiahackthon.R;
 
 import java.util.ArrayList;
@@ -99,7 +98,7 @@ public class InvestorFirstActivity extends AppCompatActivity {
                 public void onClick(View view) {
 
                     Intent intent=new Intent(InvestorFirstActivity.this, LoginActivity.class);
-                    intent.putExtra("login","investor");
+                    intent.putExtra("login","Investor");
                     startActivity(intent);
 
                 }

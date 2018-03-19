@@ -1,16 +1,17 @@
-package com.example.gargc.smartindiahackthon.Activity;
+package com.example.gargc.smartindiahackthon.Activity.Startup;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gargc.smartindiahackthon.Activity.Investor.SignUp.Accreditation;
 import com.example.gargc.smartindiahackthon.MainActivity;
 import com.example.gargc.smartindiahackthon.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,9 +31,12 @@ public class SignUpActivity extends AppCompatActivity {
 
     private EditText etName, etEmailId, etPhoneNumber, etUsername, etPassword;
 
-    private String name, emailId, phoneNumber, username, password;
+    private String name, emailId, phoneNumber, username;
+    public static String password;
 
     private ProgressBar progressBar;
+
+    public static HashMap<String,String> userMap;
 
 
 
@@ -49,6 +53,10 @@ public class SignUpActivity extends AppCompatActivity {
 
         Intent intent=getIntent();
         loginType=intent.getStringExtra("login");
+
+
+
+        Log.i("check2","checking1");
 
         mAuth=FirebaseAuth.getInstance();
 
@@ -67,6 +75,9 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Log.i("check2","checking3");
+
+
                 name = etName.getText().toString().trim();
                 emailId = etEmailId.getText().toString().trim().toLowerCase();
                 etEmailId.setText(emailId);
@@ -74,10 +85,10 @@ public class SignUpActivity extends AppCompatActivity {
                 username = etUsername.getText().toString().trim();
                 password = etPassword.getText().toString();
 
-                btCreateAccount.setEnabled(false);
 
                 if (name.length() < 2) {
                     Toast.makeText(SignUpActivity.this, "Name must be at least 2 characters", Toast.LENGTH_LONG).show();
+                    etName.requestFocus();
                 } else if (!name.matches("^[^<>'\"/;`%&!@#$*()+=:?.,~|{}]*$")) {
                     Toast.makeText(SignUpActivity.this, "Name cannot contain special characters", Toast.LENGTH_LONG).show();
                     etName.requestFocus();
@@ -98,9 +109,11 @@ public class SignUpActivity extends AppCompatActivity {
                     etPassword.requestFocus();
                 } else {
                     toggleViews(false);
+                    progressBar.setVisibility(View.VISIBLE);
+                    btCreateAccount.setVisibility(View.GONE);
+                    Log.i("check","success");
                     btCreateAccount.setEnabled(true);
                     register_user(emailId,password,name,phoneNumber,username);
-
 
                 }
                 toggleViews(true);
@@ -114,45 +127,73 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void register_user(final String emailId, final String password, final String name, final String phoneNumber, final String username) {
 
-        mAuth.createUserWithEmailAndPassword(emailId,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful())
-                {
-                    FirebaseUser current_user=FirebaseAuth.getInstance().getCurrentUser();
-                    String uid=current_user.getUid();
-                    mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(loginType).child(uid);
 
-                    HashMap<String,String> userMap=new HashMap<String, String>();
-                    userMap.put("emailId",emailId);
-                    userMap.put("name",name);
-                    userMap.put("phonenumber",phoneNumber);
-                    userMap.put("username",username);
-                    userMap.put("devicetoken", FirebaseInstanceId.getInstance().getToken());
 
-                    mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            toggleViews(true);
+        if(loginType.equals("Investor"))
+        {
+            userMap=new HashMap<String, String>();
+            userMap.put("emailId",emailId);
+            userMap.put("name",name);
+            userMap.put("phonenumber",phoneNumber);
+            userMap.put("username",username);
+            userMap.put("devicetoken", FirebaseInstanceId.getInstance().getToken());
 
-                            Intent mainIntent=new Intent(SignUpActivity.this,MainActivity.class);
-                            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(mainIntent);
-                            finish();
+            Intent intent1=new Intent(SignUpActivity.this, Accreditation.class);
+            intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent1.putExtra("password",password);
+            intent1.putExtra("hashmap",userMap);
+            startActivity(intent1);
+            finish();
+        }
+        else {
 
-                        }
-                    });
+            mAuth.createUserWithEmailAndPassword(emailId, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Log.i("check2", "checking9");
+                        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+                        String uid = current_user.getUid();
+                        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(loginType).child(uid);
 
+                        HashMap<String, String> userMap = new HashMap<String, String>();
+                        userMap.put("emailId", emailId);
+                        userMap.put("name", name);
+                        userMap.put("phonenumber", phoneNumber);
+                        userMap.put("username", username);
+                        userMap.put("devicetoken", FirebaseInstanceId.getInstance().getToken());
+
+                        mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                toggleViews(false);
+
+                                Log.i("login", loginType);
+
+                                if (loginType.equals("Investor")) {
+                                    Intent intent1 = new Intent(SignUpActivity.this, Accreditation.class);
+                                    intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent1);
+                                    finish();
+                                } else {
+                                    Intent mainIntent = new Intent(SignUpActivity.this, MainActivity.class);
+                                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(mainIntent);
+                                    finish();
+                                }
+
+                            }
+                        });
+
+
+                    } else {
+                        //  Toast.makeText(SignUpActivity.this, "Unable To Create Account... ", Toast.LENGTH_SHORT).show();
+
+                    }
 
                 }
-                else
-                {
-                    Toast.makeText(SignUpActivity.this, "Unable To Create Account... ", Toast.LENGTH_SHORT).show();
-
-                }
-
-            }
-        });
+            });
+        }
 
 
     }
@@ -164,5 +205,6 @@ public class SignUpActivity extends AppCompatActivity {
         etEmailId.setEnabled(enabled);
         etUsername.setEnabled(enabled);
         etPassword.setEnabled(enabled);
+        etPhoneNumber.setEnabled(enabled);
     }
 }

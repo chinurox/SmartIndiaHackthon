@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.gargc.smartindiahackthon.Activity.LoginActivity;
-import com.example.gargc.smartindiahackthon.Activity.SignUpActivity;
 import com.example.gargc.smartindiahackthon.R;
 
 import java.util.ArrayList;

@@ -19,11 +19,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.SignUpActivity" />
+        <activity android:name=".Activity.Startup.SignUpActivity" />
         <activity android:name=".Activity.ResetPasswordActivity" />
         <activity android:name=".Activity.FirstActivity" />
         <activity android:name=".Activity.Startup.StartupFirstActivity" />
-        <activity android:name=".Activity.Investor.InvestorFirstActivity"></activity>
+        <activity android:name=".Activity.Investor.InvestorFirstActivity" />
+        <activity android:name=".Activity.Investor.SignUp.Accreditation"></activity>
     </application>
 
 </manifest>
