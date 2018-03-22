@@ -44,7 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
 
-    String loginType;
+    public static String loginType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

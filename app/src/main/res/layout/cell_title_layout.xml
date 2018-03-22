@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bgContent"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+
+    <!-- LEFT TITLE PART -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="155dp"
+        android:layout_weight="3"
+        android:background="@color/bgTitleLeft"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="2dp"
+        android:paddingLeft="1dp"
+        android:paddingRight="0dp"
+        android:paddingTop="2dp">
+
+       <ImageView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:src="@drawable/coinvest"
+           android:id="@+id/startupimagelogo"
+           android:scaleType="centerCrop"/>
+
+
+    </RelativeLayout>
+    <!-- RIGHT TITLE PART -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/bgTitleRight"
+        android:paddingBottom="20dp"
+        android:paddingEnd="20dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="20dp"
+        android:paddingStart="15dp"
+        android:paddingTop="20dp">
+
+        <ImageView
+            android:id="@+id/title_from_to_dots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/arrow"/>
+
+        <TextView
+            android:id="@+id/title_from_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/title_from_to_dots"
+            android:layout_marginTop="-5dp"
+            android:layout_toEndOf="@+id/title_from_to_dots"
+            android:layout_toRightOf="@+id/title_from_to_dots"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:singleLine="true"
+            android:layout_marginLeft="30dp"
+            android:textColor="@android:color/black"
+            android:textSize="40sp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/title_from_to_dots_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/title_from_address"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/title_from_to_dots"
+            android:layout_toRightOf="@+id/title_from_to_dots"
+            android:src="@color/contentDividerLine" />
+
+        <TextView
+            android:id="@+id/title_to_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_from_to_dots_divider"
+            android:layout_toEndOf="@id/title_from_to_dots"
+            android:layout_toRightOf="@id/title_from_to_dots"
+            android:ellipsize="marquee"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="5dp"
+            android:fadingEdge="horizontal"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_to_address"
+            android:layout_marginTop="3dp"
+            android:id="@+id/startupabout"/>
+
+
+
+
+
+
+    </RelativeLayout>
+</LinearLayout>

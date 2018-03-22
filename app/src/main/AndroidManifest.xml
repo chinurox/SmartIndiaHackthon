@@ -3,6 +3,7 @@
     package="com.example.gargc.smartindiahackthon">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -24,7 +25,10 @@
         <activity android:name=".Activity.FirstActivity" />
         <activity android:name=".Activity.Startup.StartupFirstActivity" />
         <activity android:name=".Activity.Investor.InvestorFirstActivity" />
-        <activity android:name=".Activity.Investor.SignUp.Accreditation"></activity>
+        <activity android:name=".Activity.Investor.SignUp.Accreditation" />
+        <activity android:name=".Activity.Startup.CreateStartup" />
+        <activity android:name=".Activity.Startup.AddFeed" />
+        <activity android:name=".Activity.Investor.InvestActivity"></activity>
     </application>
 
 </manifest>
