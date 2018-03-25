@@ -24,14 +24,15 @@ public class StartupAdapter extends RecyclerView.Adapter<StartupAdapter.MyStartu
 
 
     List<Startup> list;
-    ArrayList<String> startupName,startupPhoneNumber;
+    ArrayList<String> startupName,startupPhoneNumber,email;
     Context mContext;
-    StartupAdapter(List<Startup> list,ArrayList<String> startupName,ArrayList<String> startupPhoneNumber,Context mContext)
+    StartupAdapter(List<Startup> list,ArrayList<String> startupName,ArrayList<String> startupPhoneNumber,Context mContext,ArrayList<String> email)
     {
         this.list=list;
         this.startupName=startupName;
         this.startupPhoneNumber=startupPhoneNumber;
         this.mContext=mContext;
+        this.email=email;
     }
 
 
@@ -46,11 +47,12 @@ public class StartupAdapter extends RecyclerView.Adapter<StartupAdapter.MyStartu
     public void onBindViewHolder(MyStartupHolder holder, int position) {
 
         holder.startupDescription.setText(list.get(position).getDescription());
-//        holder.startupPhoneNumber.setText(startupPhoneNumber.get(position));
+       holder.startupPhoneNumber.setText(startupPhoneNumber.get(position));
         holder.startupNameExpanded.setText(startupName.get(position));
           holder.startupName.setText(list.get(position).getName());
           holder.startupCategory.setText(list.get(position).getCategory());
         holder.startupAbout.setText(list.get(position).getAbout());
+        holder.email.setText(email.get(position));
 //
         Picasso.with(mContext).load(list.get(position).getCover()).placeholder(R.drawable.user_default)
                 .into(holder.startupCover);
@@ -70,7 +72,7 @@ public class StartupAdapter extends RecyclerView.Adapter<StartupAdapter.MyStartu
     class MyStartupHolder extends RecyclerView.ViewHolder
     {
         ImageView statupImageLogo,startupCover,startupLogoExpanded;
-        TextView startupName,startupCategory,startupAbout,startupNameExpanded,startupPhoneNumber,startupDescription;
+        TextView startupName,startupCategory,startupAbout,startupNameExpanded,startupPhoneNumber,startupDescription,email;
 
         public MyStartupHolder(View itemView) {
             super(itemView);
@@ -83,8 +85,10 @@ public class StartupAdapter extends RecyclerView.Adapter<StartupAdapter.MyStartu
             startupCover=(ImageView) itemView.findViewById(R.id.head_image);
 //            startupLogoExpanded=(ImageView) itemView.findViewById(R.id.startuplogo1);
             startupNameExpanded=(TextView) itemView.findViewById(R.id.content_name_view);
-//            startupPhoneNumber=(TextView) itemView.findViewById(R.id.startupPhoneNumber);
+            startupPhoneNumber=(TextView) itemView.findViewById(R.id.content_to_address_1);
             startupDescription=(TextView) itemView.findViewById(R.id.startupdescription);
+
+            email=(TextView) itemView.findViewById(R.id.content_to_address_2);
 
             final FoldingCell fc = (FoldingCell) itemView.findViewById(R.id.folding_cell);
             fc.setOnClickListener(new View.OnClickListener() {

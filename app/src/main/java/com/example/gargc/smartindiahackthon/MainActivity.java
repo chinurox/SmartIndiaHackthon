@@ -87,12 +87,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mAuth = FirebaseAuth.getInstance();
 
-        if(mAuth.getCurrentUser()==null)
-        {
+        if (mAuth.getCurrentUser() == null) {
             sendToStart();
         }
-
-
 
         noConLayout = (RelativeLayout) findViewById(R.id.no_network_container);
         tvNoNet = (TextView) findViewById(R.id.no_connection_tv);
@@ -103,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(mToolbar);
         actionBar = getSupportActionBar();
         actionBar.setTitle("");
-
 
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -133,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
         }
 
-        blogList = (RecyclerView)findViewById(R.id.blog_list);
+        blogList = (RecyclerView) findViewById(R.id.blog_list);
         blogList.setLayoutManager(new LinearLayoutManager(this));
         blogList.setHasFixedSize(true);
 
@@ -144,13 +140,61 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Menu menuNav = navigationView.getMenu();
 
-        final MenuItem menuItem=(MenuItem) menuNav.findItem(R.id.nav_item4);
+        final MenuItem menuItem = (MenuItem) menuNav.findItem(R.id.nav_item4);
+        final MenuItem menuItem1 = (MenuItem) menuNav.findItem(R.id.nav_item1);
+        final MenuItem menuItem2 = (MenuItem) menuNav.findItem(R.id.nav_item2);
+
+        View headerView = navigationView.getHeaderView(0);
+        final TextView navUsername = (TextView) headerView.findViewById(R.id.userName);
 
 
-        FirebaseUser mCurrentUser= mAuth.getCurrentUser();
+
+        FirebaseUser mCurrentUser = mAuth.getCurrentUser();
+
+        try {
+            final String uid=mCurrentUser.getUid();
+            final DatabaseReference rootRef1 = FirebaseDatabase.getInstance().getReference().child("Users").child("Startup");
+            rootRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    if (snapshot.child(uid).exists()) {
+                        DatabaseReference rootref4=rootRef1.child(uid).child("name");
+                        rootref4.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                String username=dataSnapshot.getValue(String.class);
+                                navUsername.setText(username);
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+        catch (Exception e)
+        {
+
+        }
+
+
+
+
+
+
+
         try {
             final String uid = mCurrentUser.getUid();
-            DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Investor");
+            final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Investor");
             rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -158,6 +202,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     {
                         Log.i("exist","true");
                         menuItem.setVisible(true);
+                        menuItem1.setVisible(false);
+                        menuItem2.setVisible(false);
+                        // checking username
+                        DatabaseReference rootRef3=rootRef.child(uid).child("name");
+                        rootRef3.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                String username=dataSnapshot.getValue(String.class);
+                                navUsername.setText(username);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                     }
                 }
 
@@ -172,9 +232,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
 
         }
-
-
-
 
     }
 
@@ -294,7 +351,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
                 viewHolder.setImage(getApplicationContext() , model.getImage());
-                viewHolder.setUserName(model.getUid());
+                viewHolder.setUserName(model.getPostedby());
 
                 Picasso.with(getApplicationContext()).load(model.getUserimage()).placeholder(R.drawable.user_default)
                         .into(viewHolder.userImg);
@@ -488,6 +545,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+
 
             }
 

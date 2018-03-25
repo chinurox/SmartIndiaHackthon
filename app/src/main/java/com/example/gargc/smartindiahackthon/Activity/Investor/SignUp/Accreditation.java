@@ -1,5 +1,6 @@
 package com.example.gargc.smartindiahackthon.Activity.Investor.SignUp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.gargc.smartindiahackthon.Activity.Startup.SignUpActivity;
+import com.example.gargc.smartindiahackthon.MainActivity;
 import com.example.gargc.smartindiahackthon.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -115,6 +117,11 @@ public class Accreditation extends AppCompatActivity {
                         Toast.makeText(Accreditation.this, "Fill all the items", Toast.LENGTH_SHORT).show();
                     } else {
 
+                        final ProgressDialog progressDialog=new ProgressDialog(Accreditation.this);
+                        progressDialog.setMessage("Creating Account");
+                        progressDialog.setCanceledOnTouchOutside(false);
+                        progressDialog.show();
+
                         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
                         mAuth.createUserWithEmailAndPassword((String) userMap.get("emailId"), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -124,12 +131,14 @@ public class Accreditation extends AppCompatActivity {
 
                                     FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
                                     String uid = current_user.getUid();
+                                    Log.i("login",uid);
 
                                     databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child("Investor").child(uid);
 
                                     databaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
+                                            progressDialog.dismiss();
                                             Log.i("check2", "checking9");
                                             databaseReference.child("RadioGroup1").setValue(selectedtext);
                                             databaseReference.child("RadioGroup2").setValue(selectedText2);
@@ -139,7 +148,11 @@ public class Accreditation extends AppCompatActivity {
                                             databaseReference.child("bio").setValue(bio1);
                                             databaseReference.child("linkedin").setValue(linkedin1);
 
+                                            Intent intent1=new Intent(Accreditation.this, MainActivity.class);
+                                            startActivity(intent1);
+
                                         }
+
                                     });
 
                                 }

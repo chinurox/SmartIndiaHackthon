@@ -1,13 +1,16 @@
 package com.example.gargc.smartindiahackthon.Activity.Startup;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -55,34 +58,84 @@ public class AddFeed extends AppCompatActivity {
         mStorage = FirebaseStorage.getInstance().getReference();
 
 
-
-        mProgress = new ProgressDialog(this);
-
         mAuth = FirebaseAuth.getInstance();
 
         mCurrentUser = mAuth.getCurrentUser();
 
+
+        final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_single_choice);
+
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("StartupUsers").child(mCurrentUser.getUid());
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot uniqueKeySnapshot : dataSnapshot.getChildren()) {
+                    //Loop 1 to go through all the child nodes of users
+
+                    String username1 = uniqueKeySnapshot.getKey();
+                    Log.i("username",username1+"");
+                    arrayAdapter.add(username1);
+
+
+                }
+
+                //AlertDialog
+                AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(AddFeed.this);
+
+
+                alertDialogBuilder.setTitle("Choose Your Startup");
+                alertDialogBuilder.setCancelable(false);
+
+                alertDialogBuilder.
+                        setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Toast.makeText(AddFeed.this, "Select one of the startup", Toast.LENGTH_SHORT).show();
+                                Intent intent2=new Intent(AddFeed.this,AddFeed.class);
+                                startActivity(intent2);
+                                finish();
+                            }
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+
+                    }
+                }).setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(AddFeed.this, arrayAdapter.getItem(i), Toast.LENGTH_SHORT).show();
+                        username=arrayAdapter.getItem(i);
+                    }
+                });
+
+                AlertDialog alertDialog=alertDialogBuilder.create();
+                alertDialog.show();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
+
+
+
+        mProgress = new ProgressDialog(this);
+
+
+
         //mDatabase = FirebaseDatabase.getInstance().getReference().child("NewsFeed").child(mCurrentUser.getUid());
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("NewsFeed");
-//        nameDatabase=FirebaseDatabase.getInstance().getReference().child("StartupUsers").child(mCurrentUser.getUid());
-//
-//
-//
-//        nameDatabase.child("Name").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//               username=dataSnapshot.getValue().toString();
-//
-//                Log.i("checkingq",dataSnapshot.toString());
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
+
+
 
 
 
@@ -143,7 +196,7 @@ public class AddFeed extends AppCompatActivity {
                             newPost.child("content").setValue(content);
                             newPost.child("username").setValue(dataSnapshot.child("name").getValue());
                             newPost.child("userimage").setValue(dataSnapshot.child("image").getValue());
-                           // newPost.child("postedby").setValue(username);
+                            newPost.child("postedby").setValue(username);
 
                             Toast.makeText(AddFeed.this, "Feed posted", Toast.LENGTH_SHORT).show();
 

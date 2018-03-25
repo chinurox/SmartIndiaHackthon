@@ -42,6 +42,7 @@ public class InvestActivity extends AppCompatActivity {
 
         final ArrayList<String> name=new ArrayList<>();
         final ArrayList<String> phoneNumber=new ArrayList<>();
+        final ArrayList<String> email=new ArrayList<>();
         for (int i=0;i<list.size();i++)
         {
             databaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child("Startup").child(list.get(i).getUid());
@@ -50,10 +51,11 @@ public class InvestActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     name.add((String) dataSnapshot.child("name").getValue());
                     phoneNumber.add((String) dataSnapshot.child("phonenumber").getValue());
+                    email.add((String)dataSnapshot.child("emailId").getValue());
                     size++;
                     if(size==list.size()) {
 
-                        StartupAdapter startupAdapter = new StartupAdapter(list, name, phoneNumber, InvestActivity.this);
+                        StartupAdapter startupAdapter = new StartupAdapter(list, name, phoneNumber, InvestActivity.this,email);
                         mRecyclerView.setAdapter(startupAdapter);
                         startupAdapter.notifyDataSetChanged();
                     }

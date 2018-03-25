@@ -63,7 +63,7 @@
         android:layout_marginLeft="20dp"
         android:textColor="#000"
         android:layout_marginTop="20dp"
-        android:hint="       Enter the Content"
+        android:hint="Enter the Content"
         android:background="@drawable/edit_text_background"
         android:layout_below="@+id/post_description"
         />
@@ -72,9 +72,10 @@
         android:id="@+id/btn_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/ripple_effect"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:textColor="#FFF"
         android:text="submit post" />
 
 </RelativeLayout>

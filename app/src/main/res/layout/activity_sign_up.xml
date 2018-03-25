@@ -73,6 +73,9 @@
 
             android:orientation="vertical">
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
             <EditText
                 android:id="@+id/etName"
                 android:layout_width="270dp"
@@ -86,6 +89,13 @@
                 android:maxLines="1"
                 android:paddingLeft="16dp"
                 android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
+
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
 
             <EditText
                 android:id="@+id/etEmailId"
@@ -100,7 +110,12 @@
                 android:maxLines="1"
                 android:paddingLeft="16dp"
                 android:textSize="14sp" />
+        </android.support.design.widget.TextInputLayout>
 
+
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
             <EditText
                 android:id="@+id/etPhoneNumber"
                 android:layout_width="270dp"
@@ -116,7 +131,12 @@
                 android:paddingLeft="16dp"
                 android:visibility="visible"
                 android:textSize="14sp" />
+        </android.support.design.widget.TextInputLayout>
 
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
             <EditText
                 android:id="@+id/etUsername"
                 android:layout_width="270dp"
@@ -130,7 +150,12 @@
                 android:maxLines="1"
                 android:paddingLeft="16dp"
                 android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
 
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="270dp"
@@ -145,8 +170,10 @@
                 android:maxLines="1"
                 android:paddingLeft="16dp"
                 android:textSize="14sp" />
+        </android.support.design.widget.TextInputLayout>
 
-        </LinearLayout>
+
+    </LinearLayout>
 
 
 
@@ -173,7 +200,7 @@
                     android:id="@+id/btCreateAccount"
                     android:layout_width="180dp"
                     android:layout_height="42dp"
-                    android:background="@drawable/ripple_effect_blue"
+                    android:background="@drawable/ripple_effect"
                     android:gravity="center"
                     android:text="CREATE ACCOUNT"
                     android:textColor="#fff"

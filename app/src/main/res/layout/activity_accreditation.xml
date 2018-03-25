@@ -139,7 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NEXT"
-                android:background="@drawable/ripple_effect_blue"
+                android:background="@drawable/ripple_effect"
                 android:textColor="#FFF"
                 android:layout_gravity="center"
                 android:id="@+id/next"
@@ -164,7 +164,9 @@
 
 
 
-
+<android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="64dp">
             <EditText
                 android:id="@+id/budget"
                 android:layout_width="match_parent"
@@ -179,7 +181,11 @@
                 android:singleLine="true"
                 android:textColor="#212121"
                 android:textSize="14sp" />
+</android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp">
             <EditText
                 android:id="@+id/linkedin"
                 android:layout_width="match_parent"
@@ -194,6 +200,11 @@
                 android:singleLine="true"
                 android:textColor="#212121"
                 android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp">
             <EditText
                 android:id="@+id/website"
                 android:layout_width="match_parent"
@@ -208,8 +219,12 @@
                 android:singleLine="true"
                 android:textColor="#212121"
                 android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
 
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="115dp">
             <EditText
                 android:id="@+id/bio"
                 android:layout_width="match_parent"
@@ -219,20 +234,22 @@
                 android:background="@drawable/border_rectangular_white"
                 android:gravity="start|center_vertical"
                 android:hint="Mini Bio"
+                android:inputType="textMultiLine"
                 android:maxLines="5"
                 android:paddingLeft="16dp"
                 android:singleLine="true"
                 android:textColor="#212121"
                 android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Apply"
-                android:background="@drawable/ripple_effect_blue"
+                android:background="@drawable/ripple_effect"
                 android:textColor="#FFF"
                 android:layout_gravity="center"
                 android:id="@+id/apply"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="60dp"
                 />
 
         </LinearLayout>

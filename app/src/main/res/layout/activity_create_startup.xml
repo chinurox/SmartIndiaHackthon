@@ -73,7 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         android:hint="Description"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
@@ -84,28 +84,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:id="@+id/main_cat_txt"
         android:layout_below="@+id/main_img_container"
         android:layout_marginTop="10dp"
-        android:background="@drawable/grey_background"
         android:text="Select category"
         android:gravity="center"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:layout_marginLeft="20dp"
         android:textColor="#000"/>
 
     <Spinner
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:id="@+id/main_spinner"
         android:prompt="@string/spinner_prompt"
-        android:layout_marginLeft="80dp"
         android:layout_below="@+id/main_img_container"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="4dp">
     </Spinner>
 
     </LinearLayout>
@@ -121,13 +119,13 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="35dp"
-        android:background="@drawable/btn_background"
+        android:background="@drawable/ripple_effect"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="5dp"
         android:text="Choose Startup Logo"
-        android:textColor="#0a0909"
+        android:textColor="#ffffff"
         android:layout_marginTop="15dp" />
 
     <Button
@@ -135,14 +133,14 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/btn_background"
+        android:background="@drawable/ripple_effect"
         android:paddingBottom="5dp"
         android:layout_marginLeft="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="5dp"
         android:text="Choose Cover Image"
-        android:textColor="#0a0a0a"
+        android:textColor="#ffffff"
         android:layout_marginTop="15dp" />
 </LinearLayout>
 
@@ -188,7 +186,7 @@
         android:layout_gravity="center"
         android:textStyle="bold"
         android:text="Create Startup"
-        android:background="@drawable/border_black"
-        android:textColor="#101010" />
+        android:background="@drawable/ripple_effect"
+        android:textColor="#ffffff" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
