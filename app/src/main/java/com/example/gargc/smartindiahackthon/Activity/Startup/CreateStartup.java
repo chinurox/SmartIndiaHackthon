@@ -1,18 +1,27 @@
 package com.example.gargc.smartindiahackthon.Activity.Startup;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -33,6 +42,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class CreateStartup extends AppCompatActivity {
 
     private Button btnImg ,createStartup ,btnImg2 ;
@@ -49,10 +60,75 @@ public class CreateStartup extends AppCompatActivity {
 
     String uid;
 
+
+    EditText editTextOfCofounder;
+    Button addCofounder;
+    ListView listView;
+    ArrayList<String> listItems;
+    ArrayAdapter<String> adapter;
+
+    CircleImageView circleImageView;
+    ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_startup);
+
+        // Add Cofounder
+        editTextOfCofounder = (EditText) findViewById(R.id.CofounderEmailId);
+        addCofounder = (Button) findViewById(R.id.addItem);
+        listView = (ListView) findViewById(R.id.listView);
+        listItems = new ArrayList<String>();
+        adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, listItems);
+        listView.setAdapter(adapter);
+        addCofounder.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                if(editTextOfCofounder.getText().toString().equals(""))
+                {
+                    Toast.makeText(CreateStartup.this, "Cofounder email can't be empty", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    listItems.add(editTextOfCofounder.getText().toString());
+                    editTextOfCofounder.setText("");
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        CreateStartup.this);
+                alert.setTitle("Alert!!");
+                alert.setMessage("Are you sure to Delete Cofounder");
+                alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        listItems.remove(i);
+                        adapter.notifyDataSetChanged();
+                        dialog.dismiss();
+
+                    }
+                });
+                alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                });
+
+                alert.show();
+
+                return true;
+            }
+        });
+
 
         btnImg=(Button) findViewById(R.id.main_img_btn);
         btnImg2=(Button) findViewById(R.id.main_img_btn_2);
@@ -94,15 +170,12 @@ public class CreateStartup extends AppCompatActivity {
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter2);
 
+        circleImageView=(CircleImageView) findViewById(R.id.center);
+        imageView=(ImageView) findViewById(R.id.base);
 
-
-
-
-        btnImg.setOnClickListener(new View.OnClickListener() {
+        circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-
+            public void onClick(View view) {
                 Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 galleryIntent.setType("image/*");
                 startActivityForResult(galleryIntent , 1);
@@ -110,16 +183,42 @@ public class CreateStartup extends AppCompatActivity {
             }
         });
 
-        btnImg2.setOnClickListener(new View.OnClickListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 galleryIntent.setType("image/*");
                 startActivityForResult(galleryIntent , 2);
 
             }
         });
+
+
+
+
+
+//        btnImg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view)
+//            {
+//
+//                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//                galleryIntent.setType("image/*");
+//                startActivityForResult(galleryIntent , 1);
+//
+//            }
+//        });
+//
+//        btnImg2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view)
+//            {
+//                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//                galleryIntent.setType("image/*");
+//                startActivityForResult(galleryIntent , 2);
+//
+//            }
+//        });
 
         createStartup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,7 +281,12 @@ public class CreateStartup extends AppCompatActivity {
                             startupMap.put("Category",category);
                             startupMap.put("logo",imgUri.toString());
                             startupMap.put("cover",imgUri2.toString());
+                            startupMap.put("size",listItems.size());
                             startupMap.put("uid",uid);
+                            for(int i=0;i<listItems.size();i++)
+                            {
+                                startupMap.put("cofounder"+i,listItems.get(i));
+                            }
 
                             productDB.setValue(startupMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -250,13 +354,21 @@ public class CreateStartup extends AppCompatActivity {
         if(requestCode==1 && resultCode==RESULT_OK)
         {
             mImageUri = data.getData();
-            imgView.setImageURI(mImageUri);
+            circleImageView.setImageURI(mImageUri);
         }
 
         if(requestCode==2 && resultCode==RESULT_OK)
         {
             mImageUri2 = data.getData();
-            imgView2.setImageURI(mImageUri2);
+            imageView.setImageURI(mImageUri2);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            Display display = getWindowManager().getDefaultDisplay();
+            int width = display.getWidth(); // ((display.getWidth()*20)/100)
+            int height =display.getHeight();
+
+            RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(width,height);
+            imageView.setLayoutParams(layoutParams);
+
         }
 
     }

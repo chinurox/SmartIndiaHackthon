@@ -28,7 +28,8 @@
         <activity android:name=".Activity.Investor.SignUp.Accreditation" />
         <activity android:name=".Activity.Startup.CreateStartup" />
         <activity android:name=".Activity.Startup.AddFeed" />
-        <activity android:name=".Activity.Investor.InvestActivity"></activity>
+        <activity android:name=".Activity.Investor.InvestActivity" />
+        <activity android:name=".Activity.ViewProfile"></activity>
     </application>
 
 </manifest>

@@ -156,6 +156,13 @@ public class Accreditation extends AppCompatActivity {
                                     });
 
                                 }
+                                else
+                                {
+                                    Toast.makeText(Accreditation.this, "Email Id Already exists", Toast.LENGTH_SHORT).show();
+                                    Intent intent1=new Intent(Accreditation.this, SignUpActivity.class);
+                                    intent1.putExtra("login","Investor");
+                                    startActivity(intent1);
+                                }
 
                             }
 

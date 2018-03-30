@@ -1,11 +1,14 @@
 package com.example.gargc.smartindiahackthon.Activity.Startup;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -89,24 +92,31 @@ public class SignUpActivity extends AppCompatActivity {
                 if (name.length() < 2) {
                     Toast.makeText(SignUpActivity.this, "Name must be at least 2 characters", Toast.LENGTH_LONG).show();
                     etName.requestFocus();
+                    toggleViews(true);
                 } else if (!name.matches("^[^<>'\"/;`%&!@#$*()+=:?.,~|{}]*$")) {
                     Toast.makeText(SignUpActivity.this, "Name cannot contain special characters", Toast.LENGTH_LONG).show();
                     etName.requestFocus();
+                    toggleViews(true);
                 } else if (!emailId.matches("^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$")) {
                     Toast.makeText(SignUpActivity.this, "Please enter a valid email id", Toast.LENGTH_LONG).show();
                     etEmailId.requestFocus();
+                    toggleViews(true);
                 } else if (!(phoneNumber.length() == 10 && (phoneNumber.startsWith("9") || phoneNumber.startsWith("8") || phoneNumber.startsWith("7")))) {
                     Toast.makeText(SignUpActivity.this, "Please enter a valid mobile number", Toast.LENGTH_SHORT).show();
                     etPhoneNumber.requestFocus();
+                    toggleViews(true);
                 } else if (username.length() < 3) {
                     Toast.makeText(SignUpActivity.this, "Username must be at least 3 characters long", Toast.LENGTH_LONG).show();
                     etUsername.requestFocus();
+                    toggleViews(true);
                 } else if (!username.matches("(?=^.{3,20}$)^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$")) {
                     Toast.makeText(SignUpActivity.this, "Username cannot contain special characters", Toast.LENGTH_LONG).show();
                     etUsername.requestFocus();
+                    toggleViews(true);
                 } else if (password.length() == 0) {
                     Toast.makeText(SignUpActivity.this, "Please enter a password", Toast.LENGTH_LONG).show();
                     etPassword.requestFocus();
+                    toggleViews(true);
                 } else {
                     toggleViews(false);
                     progressBar.setVisibility(View.VISIBLE);
@@ -116,7 +126,6 @@ public class SignUpActivity extends AppCompatActivity {
                     register_user(emailId,password,name,phoneNumber,username);
 
                 }
-                toggleViews(true);
 
 
             }
@@ -188,6 +197,10 @@ public class SignUpActivity extends AppCompatActivity {
 
                     } else {
                         //  Toast.makeText(SignUpActivity.this, "Unable To Create Account... ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, "Email Id Already exists", Toast.LENGTH_SHORT).show();
+                        Intent intent1=new Intent(SignUpActivity.this, SignUpActivity.class);
+                        intent1.putExtra("login","Startup");
+                        startActivity(intent1);
 
                     }
 
@@ -206,5 +219,13 @@ public class SignUpActivity extends AppCompatActivity {
         etUsername.setEnabled(enabled);
         etPassword.setEnabled(enabled);
         etPhoneNumber.setEnabled(enabled);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+                INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
     }
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
      android:layout_width="match_parent"
-
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -23,9 +22,36 @@
         android:textSize="40dp"
         />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="#d6d6d6"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/base"
+                android:layout_height="50dp"
+                android:layout_width="50dp"
+                android:src="@drawable/addstartupcoverpage"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="200dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/center"
+                android:layout_height="150dp"
+                android:layout_width="150dp"
+                android:src="@drawable/startuplogo"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:id="@+id/createstartupname">
     <EditText
 
@@ -108,11 +134,46 @@
 
     </LinearLayout>
 
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-<LinearLayout
+            <EditText
+                android:id="@+id/CofounderEmailId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/addItem"
+                android:hint="Add Email Id Of Cofounder" />
+
+
+            <Button
+                android:id="@+id/addItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ripple_effect"
+                android:textColor="#FFF"
+                android:text="Add" />
+
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@+id/CofounderEmailId" >
+            </ListView>
+
+        </RelativeLayout>
+
+
+
+        <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+            android:visibility="gone">
     <Button
         android:id="@+id/main_img_btn"
         android:layout_width="150dp"
@@ -149,6 +210,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/main_img_container"
         android:layout_below="@+id/main_img_btn"
+        android:visibility="gone"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -180,7 +242,7 @@
 
     <Button
         android:id="@+id/createStartup"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -31,6 +31,7 @@ import com.example.gargc.smartindiahackthon.Activity.Investor.InvestActivity;
 import com.example.gargc.smartindiahackthon.Activity.Startup.AddFeed;
 import com.example.gargc.smartindiahackthon.Activity.Startup.CreateStartup;
 import com.example.gargc.smartindiahackthon.Activity.Startup.SignUpActivity;
+import com.example.gargc.smartindiahackthon.Activity.ViewProfile;
 import com.example.gargc.smartindiahackthon.Model.Blog;
 import com.example.gargc.smartindiahackthon.Model.Startup;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -77,6 +78,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DatabaseReference mDatabase,mLikeDatabase;
 
     private boolean mProcessLike = false;
+
+    String user="Startup";
 
 
 
@@ -201,6 +204,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if(dataSnapshot.child(uid).exists())
                     {
                         Log.i("exist","true");
+                        user="Investor";
                         menuItem.setVisible(true);
                         menuItem1.setVisible(false);
                         menuItem2.setVisible(false);
@@ -286,6 +290,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_item4:
 
                 return checking();
+
+            case R.id.nav_item3:
+                Intent startIntent1=new Intent(MainActivity.this,ViewProfile.class);
+                startIntent1.putExtra("user",user);
+                startActivity(startIntent1);
+                return  true;
+
 
             default:
                 return true;
