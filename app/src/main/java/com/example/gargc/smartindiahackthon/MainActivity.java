@@ -1,7 +1,9 @@
 package com.example.gargc.smartindiahackthon;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
@@ -28,9 +30,11 @@ import android.widget.Toast;
 
 import com.example.gargc.smartindiahackthon.Activity.FirstActivity;
 import com.example.gargc.smartindiahackthon.Activity.Investor.InvestActivity;
+import com.example.gargc.smartindiahackthon.Activity.Investor.ViewProfileInvestor;
 import com.example.gargc.smartindiahackthon.Activity.Startup.AddFeed;
 import com.example.gargc.smartindiahackthon.Activity.Startup.CreateStartup;
 import com.example.gargc.smartindiahackthon.Activity.Startup.SignUpActivity;
+import com.example.gargc.smartindiahackthon.Activity.Terms;
 import com.example.gargc.smartindiahackthon.Activity.ViewProfile;
 import com.example.gargc.smartindiahackthon.Model.Blog;
 import com.example.gargc.smartindiahackthon.Model.Startup;
@@ -55,6 +59,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth mAuth;
+
+    ProgressDialog progressDialog;
 
 
 
@@ -83,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,9 +97,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mAuth = FirebaseAuth.getInstance();
 
+        progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setMessage("Loading");
+        progressDialog.show();
+
         if (mAuth.getCurrentUser() == null) {
             sendToStart();
         }
+
+
 
         noConLayout = (RelativeLayout) findViewById(R.id.no_network_container);
         tvNoNet = (TextView) findViewById(R.id.no_connection_tv);
@@ -102,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
         actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.bac)));
         actionBar.setTitle("");
 
 
@@ -292,9 +306,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return checking();
 
             case R.id.nav_item3:
-                Intent startIntent1=new Intent(MainActivity.this,ViewProfile.class);
-                startIntent1.putExtra("user",user);
-                startActivity(startIntent1);
+                if(user.equals("Startup")) {
+                    Intent startIntent1 = new Intent(MainActivity.this, ViewProfile.class);
+                    startIntent1.putExtra("user", user);
+                    startActivity(startIntent1);
+                }
+                else
+                {
+                    Intent startIntent1 = new Intent(MainActivity.this, ViewProfile.class);
+                    startIntent1.putExtra("user", user);
+                    startActivity(startIntent1);
+
+                }
+                return  true;
+
+            case R.id.terms_conditions:
+                Intent startIntent2=new Intent(MainActivity.this,Terms.class);
+                startActivity(startIntent2);
                 return  true;
 
 
@@ -376,6 +404,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                        startActivity(singleBlogIntent);
                     }
                 });
+
+                progressDialog.dismiss();
 
                 mLikeDatabase.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -505,7 +535,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public void setUserName(String username)
         {
             TextView blog_username = (TextView) mView.findViewById(R.id.blog_item_user_name);
-            blog_username.setText("Posted by " + username);
+            blog_username.setText(username);
         }
 
     }

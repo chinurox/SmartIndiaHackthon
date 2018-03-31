@@ -4,32 +4,68 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Startup.SignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ResetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.FirstActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Startup.StartupFirstActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Investor.InvestorFirstActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Investor.SignUp.Accreditation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Startup.CreateStartup"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Startup.AddFeed"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Investor.InvestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ViewProfile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.splash.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.Startup.SignUpActivity" />
-        <activity android:name=".Activity.ResetPasswordActivity" />
-        <activity android:name=".Activity.FirstActivity" />
-        <activity android:name=".Activity.Startup.StartupFirstActivity" />
-        <activity android:name=".Activity.Investor.InvestorFirstActivity" />
-        <activity android:name=".Activity.Investor.SignUp.Accreditation" />
-        <activity android:name=".Activity.Startup.CreateStartup" />
-        <activity android:name=".Activity.Startup.AddFeed" />
-        <activity android:name=".Activity.Investor.InvestActivity" />
-        <activity android:name=".Activity.ViewProfile"></activity>
+        <activity android:name=".Activity.Terms" />
+        <activity android:name=".Activity.Investor.ViewProfileInvestor" />
+        <activity android:name=".Activity.Investor.ViewPichDeck"></activity>
     </application>
 
 </manifest>

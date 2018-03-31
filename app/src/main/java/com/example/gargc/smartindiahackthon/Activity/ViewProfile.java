@@ -1,6 +1,8 @@
 package com.example.gargc.smartindiahackthon.Activity;
 
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,9 +19,14 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ViewProfile extends AppCompatActivity {
 
-    String user;
+    public static String user;
 
     TextView phoneNumber,email,username,user1;
+
+
+    private ViewPager mPager;
+    private MainPageAdapter mPageAdapter;
+    private TabLayout mTabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,33 +46,20 @@ public class ViewProfile extends AppCompatActivity {
         username=(TextView) findViewById(R.id.username1);
         user1=(TextView) findViewById(R.id.user1);
 
+        // Tab layout
+
+        mPager = (ViewPager) findViewById(R.id.viewpager);
+        mPageAdapter = new MainPageAdapter(getSupportFragmentManager());
+        mPager.setAdapter(mPageAdapter);
+
+        mTabLayout = (TabLayout) findViewById(R.id.tabs);
+        mTabLayout.setupWithViewPager(mPager);
+
+
+        // finish
 
 
 
-        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
-        final String uid = current_user.getUid();
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference().child("Users").child(user).child(uid);
-
-        rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String username1=dataSnapshot.child("name").getValue().toString();
-                String phone=dataSnapshot.child("phonenumber").getValue().toString();
-                String email1=dataSnapshot.child("emailId").getValue().toString();
-                String user2=dataSnapshot.child("username").getValue().toString();
-
-                phoneNumber.setText(phone);
-                email.setText(email1);
-                username.setText(username1);
-                user1.setText(user2);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
     }

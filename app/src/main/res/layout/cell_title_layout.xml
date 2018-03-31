@@ -19,10 +19,11 @@
         android:paddingRight="0dp"
         android:paddingTop="2dp">
 
-       <ImageView
+       <de.hdodenhof.circleimageview.CircleImageView
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:src="@drawable/coinvest"
+           android:src="@drawable/avatar"
+           android:background="#FF9A00"
            android:id="@+id/startupimagelogo"
            android:scaleType="centerCrop"/>
 
@@ -62,9 +63,9 @@
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
             android:singleLine="true"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="15dp"
             android:textColor="@android:color/black"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:textStyle="bold"/>
 
         <ImageView
@@ -87,7 +88,7 @@
             android:layout_toRightOf="@id/title_from_to_dots"
             android:ellipsize="marquee"
             android:layout_marginLeft="800dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="0dp"
             android:fadingEdge="horizontal"
             android:singleLine="true"
             android:textColor="@android:color/black"

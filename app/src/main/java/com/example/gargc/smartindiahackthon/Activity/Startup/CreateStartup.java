@@ -274,7 +274,7 @@ public class CreateStartup extends AppCompatActivity {
 
                             DatabaseReference productDB = mDatabase.child(category).child(startupName);
 
-                            HashMap startupMap=new HashMap();
+                            final HashMap startupMap=new HashMap();
                             startupMap.put("Name",startupName);
                             startupMap.put("About",startupAbout);
                             startupMap.put("Description",startupDescription);
@@ -297,7 +297,7 @@ public class CreateStartup extends AppCompatActivity {
                                         hashMap.put("Name",startupName);
                                         hashMap.put("Category",category);
 
-                                        startupUsers.child(startupName).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        startupUsers.child(startupName).setValue(startupMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
 

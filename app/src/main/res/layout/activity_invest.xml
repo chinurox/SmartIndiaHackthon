@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#bbbeb6"
+    android:background="#000000"
     tools:context="com.example.gargc.smartindiahackthon.Activity.Investor.InvestActivity">
 
     <android.support.v7.widget.RecyclerView

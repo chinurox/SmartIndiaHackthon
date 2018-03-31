@@ -8,6 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    app:itemIconTint="@color/bac"
     tools:openDrawer="start">
 
    <include
@@ -21,6 +22,7 @@
        android:layout_height="match_parent"
        android:layout_gravity="start"
        android:fitsSystemWindows="true"
+
        android:visibility="visible"
        app:headerLayout="@layout/nav_header_main"
        app:menu="@menu/activity_main_drawer" />

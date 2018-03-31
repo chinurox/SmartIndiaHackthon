@@ -1,20 +1,27 @@
 package com.example.gargc.smartindiahackthon.Activity.Investor;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.example.gargc.smartindiahackthon.Model.Startup;
 import com.example.gargc.smartindiahackthon.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.ramotion.foldingcell.FoldingCell;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by gargc on 22-03-2018.
@@ -26,6 +33,7 @@ public class StartupAdapter extends RecyclerView.Adapter<StartupAdapter.MyStartu
     List<Startup> list;
     ArrayList<String> startupName,startupPhoneNumber,email;
     Context mContext;
+
     StartupAdapter(List<Startup> list,ArrayList<String> startupName,ArrayList<String> startupPhoneNumber,Context mContext,ArrayList<String> email)
     {
         this.list=list;
@@ -58,8 +66,31 @@ public class StartupAdapter extends RecyclerView.Adapter<StartupAdapter.MyStartu
                 .into(holder.startupCover);
         Picasso.with(mContext).load(list.get(position).getLogo()).placeholder(R.drawable.user_default)
                 .into(holder.statupImageLogo);
-//        Picasso.with(mContext).load(list.get(position).getLogo()).placeholder(R.drawable.user_default)
-//                .into(holder.startupLogoExpanded);
+
+        holder.viewPitchDeck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(mContext,ViewPichDeck.class);
+                mContext.startActivity(intent);
+            }
+        });
+
+
+        holder.favoriteButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                {
+                    DatabaseReference mLikeDatabase = FirebaseDatabase.getInstance().getReference().child("Favorites");
+
+
+                }
+                else {
+
+                }
+            }
+        });
+
 
 
     }
@@ -71,13 +102,19 @@ public class StartupAdapter extends RecyclerView.Adapter<StartupAdapter.MyStartu
 
     class MyStartupHolder extends RecyclerView.ViewHolder
     {
-        ImageView statupImageLogo,startupCover,startupLogoExpanded;
+        ImageView startupCover,startupLogoExpanded;
+        CircleImageView statupImageLogo;
         TextView startupName,startupCategory,startupAbout,startupNameExpanded,startupPhoneNumber,startupDescription,email;
+
+        ToggleButton favoriteButton;
+
+        TextView viewPitchDeck;
+
 
         public MyStartupHolder(View itemView) {
             super(itemView);
 
-            statupImageLogo=(ImageView)itemView.findViewById(R.id.startupimagelogo);
+            statupImageLogo=(CircleImageView)itemView.findViewById(R.id.startupimagelogo);
             startupName=(TextView) itemView.findViewById(R.id.title_from_address);
            startupCategory=(TextView) itemView.findViewById(R.id.title_to_address);
             startupAbout=(TextView) itemView.findViewById(R.id.startupabout);
@@ -88,6 +125,9 @@ public class StartupAdapter extends RecyclerView.Adapter<StartupAdapter.MyStartu
             startupPhoneNumber=(TextView) itemView.findViewById(R.id.content_to_address_1);
             startupDescription=(TextView) itemView.findViewById(R.id.startupdescription);
 
+            viewPitchDeck=(TextView) itemView.findViewById(R.id.content_request_btn);
+
+
             email=(TextView) itemView.findViewById(R.id.content_to_address_2);
 
             final FoldingCell fc = (FoldingCell) itemView.findViewById(R.id.folding_cell);
@@ -97,6 +137,8 @@ public class StartupAdapter extends RecyclerView.Adapter<StartupAdapter.MyStartu
                     fc.toggle(false);
                 }
             });
+
+            favoriteButton=(ToggleButton) itemView.findViewById(R.id.head_image_right_text);
 
 
 
